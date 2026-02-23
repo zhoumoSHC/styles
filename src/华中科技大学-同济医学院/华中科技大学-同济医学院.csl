@@ -16,6 +16,7 @@
     <updated>2025-01-08T17:10:39+08:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
+
   <locale xml:lang="en">
     <date form="text">
       <date-part name="day" suffix=" " range-delimiter="-"/>
@@ -27,6 +28,7 @@
       <term name="month-07" form="short">July</term>
     </terms>
   </locale>
+
   <locale xml:lang="zh">
     <date form="text">
       <date-part name="year" suffix="年" range-delimiter="&#8212;"/>
@@ -42,17 +44,16 @@
       <term name="in">见</term>
     </terms>
   </locale>
+
   <locale>
     <date form="numeric">
       <date-part name="year" range-delimiter="/"/>
       <date-part name="month" form="numeric-leading-zeros" prefix="-" range-delimiter="/"/>
       <date-part name="day" form="numeric-leading-zeros" prefix="-" range-delimiter="/"/>
     </date>
-    <terms>
-      <term name="citation-range-delimiter">-</term>
-      <term name="page-range-delimiter">-</term>
-    </terms>
+    <!-- Removed the empty <terms/> block (CSL schema requires at least one <term> if <terms> is present) -->
   </locale>
+
   <!-- 主要责任者 -->
   <macro name="author">
     <names variable="author">
@@ -69,6 +70,7 @@
       </substitute>
     </names>
   </macro>
+
   <!-- 题名 -->
   <macro name="title-en">
     <group delimiter=" ">
@@ -108,6 +110,7 @@
       </choose>
     </group>
   </macro>
+
   <macro name="title-zh">
     <group delimiter=": ">
       <text variable="title"/>
@@ -136,6 +139,7 @@
       </if>
     </choose>
   </macro>
+
   <!-- 书籍的卷号（“第 x 卷”或“第 x 册”） -->
   <macro name="volume">
     <choose>
@@ -154,6 +158,7 @@
       </if>
     </choose>
   </macro>
+
   <!-- 学位论文类型 -->
   <macro name="thesis-type">
     <choose>
@@ -165,6 +170,7 @@
       </else>
     </choose>
   </macro>
+
   <!-- 其他责任者 -->
   <macro name="secondary-contributors">
     <names variable="translator">
@@ -172,6 +178,7 @@
       <label form="short" prefix=", "/>
     </names>
   </macro>
+
   <!-- 专著题名 -->
   <macro name="container-booklike">
     <group delimiter=": ">
@@ -190,6 +197,7 @@
       </choose>
     </group>
   </macro>
+
   <!-- 连续出版物中的出处项 -->
   <macro name="container-periodical">
     <choose>
@@ -224,6 +232,7 @@
       </else>
     </choose>
   </macro>
+
   <macro name="edition-en">
     <choose>
       <if is-numeric="edition">
@@ -235,6 +244,7 @@
       </else>
     </choose>
   </macro>
+
   <!-- 版本项 -->
   <macro name="edition-zh">
     <choose>
@@ -248,6 +258,7 @@
       </else>
     </choose>
   </macro>
+
   <!-- 连续出版物的年卷期 -->
   <macro name="year-volume-issue">
     <group delimiter=", ">
@@ -256,6 +267,7 @@
     </group>
     <text variable="issue" prefix="(" suffix=")"/>
   </macro>
+
   <!-- 出版项 -->
   <macro name="publisher">
     <choose>
@@ -304,6 +316,7 @@
       </else>
     </choose>
   </macro>
+
   <!-- 专利国别 -->
   <macro name="patent-country">
     <choose>
@@ -319,6 +332,7 @@
       </else>
     </choose>
   </macro>
+
   <!-- 出版年 -->
   <macro name="issued-year">
     <choose>
@@ -339,10 +353,12 @@
       </else>
     </choose>
   </macro>
+
   <!-- 出版日期，用于报纸文献、专利的“公告日期或公开日期”、电子资源的“更新或修改日期” -->
   <macro name="issued-date">
     <date variable="issued" form="numeric"/>
   </macro>
+
   <!-- 获取和访问路径、数字对象唯一标识符 -->
   <macro name="access">
     <choose>
@@ -352,6 +368,7 @@
       </if>
     </choose>
   </macro>
+
   <!-- 参考文献表格式 -->
   <macro name="entry-layout-en">
     <group delimiter=". ">
@@ -400,6 +417,7 @@
       <text macro="access"/>
     </group>
   </macro>
+
   <macro name="entry-layout-zh">
     <group delimiter=". ">
       <text macro="author"/>
@@ -429,9 +447,6 @@
           <!-- 4.2 专著中的析出文献 -->
           <group delimiter=", ">
             <text macro="title-zh"/>
-            <!-- 格式要求“会议名称(或论文集). 会议城市, 国家”中的是句点，
-              但是示例“(APSIPA ASC), Honolulu, HI, USA”中是逗号
-            -->
             <text macro="container-booklike"/>
             <text macro="publisher"/>
           </group>
@@ -446,6 +461,7 @@
       <text macro="access"/>
     </group>
   </macro>
+
   <citation collapse="citation-number" after-collapse-delimiter=",">
     <sort>
       <key variable="citation-number"/>
@@ -454,14 +470,11 @@
       <text variable="citation-number"/>
     </layout>
   </citation>
+
   <bibliography entry-spacing="0" et-al-min="4" et-al-use-first="3" second-field-align="flush">
-    <layout locale="en">
-      <text variable="citation-number" prefix="[" suffix="]"/>
-      <text macro="entry-layout-en"/>
-    </layout>
     <layout>
       <text variable="citation-number" prefix="[" suffix="]"/>
-      <text macro="entry-layout-zh"/>
+      <text macro="entry-layout-en"/>
     </layout>
   </bibliography>
 </style>
